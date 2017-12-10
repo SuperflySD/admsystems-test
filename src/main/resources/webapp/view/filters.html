@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Filters settings</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/webapp/static/css/bootstrap-3.3.7.min.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/webapp/static/css/mainPage.css"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-inverse" style="border-right-width: 0px;border-bottom-width: 0px;">
+    <div class="container-fluid" style="padding-right: 0px;">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar" style=" padding-right: 0px;">
+            <ul class="nav navbar-nav">
+                <a class="navbar-brand" th:href="@{/}" style="background-color:grey">Home</a>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style=" margin-right: 0px;">
+
+                <div class="dropdown" style="margin-top: 11px;" th:object="${session}">
+                    <button class="btn btn-md  dropdown-toggle" type="button" data-toggle="dropdown"
+                            style="margin-top: 10px;border-top-width: 1px; border-bottom-width: 0px;border-right-width: 0px;padding-bottom: 4px; height: 28px;"
+                            th:text="*{master!=null}?*{master}:'Log in' ">
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu" th:if="*{master!=null}">
+                        <li><a th:href="@{/logout}" th:text="'Log out'"></a></li>
+                    </ul>
+                    <ul class="dropdown-menu" th:if="*{master==null}">
+                        <li><a th:href="@{/}" th:text="'Log in'"></a></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container text-center" style=" margin: auto; height: 1000px;width: 80%;">
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <h3>Set filters for account <span style="color:blue" th:text="${session.attachedAccountEmail}"></span>
+                </h3>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container-fluid text-center" style="padding-right: 0px;">
+        <div class="row content">
+            <div class="col-sm-4 sidenav">
+                <h4>Add new filter</h4>
+                <form class="form-horizontal" method="post" action="/addFilter/{attachedAccountEmail}">
+                    <div class="form-group">
+                        <label for="new-email-keyword" class="control-label col-xs-2">Email</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" name="new-email-keyword" id="new-email-keyword"
+                                   placeholder="Keyword for sender's email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-subject-keyword" class="control-label col-xs-2">Subject</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" name="new-subject-keyword" id="new-subject-keyword"
+                                   placeholder="Keyword for subject">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12" style="text-align: right;">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="col-sm-8 text-center">
+                <div class="row">
+                    <div class="text-center">
+                        <h4>Current filters</h4>
+                    </div>
+
+                </div>
+
+                <div th:each="filter:${filtersList}">
+                    <!--/*@thymesVar id="filter" type="com.epam.cln.entity.db.Filter"*/-->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label th:text="${filter.getSubjectFilter()}" value=""></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label th:text="${filter.getEmailAddressFilter()}" value=""></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="btn btn-danger" role="button"
+                               th:href="@{'/deleteFilter/'+${filter.getFilterId()}}"> Delete </a>
+                        </div>
+                    </div>
+                    <div id="resultsBlock"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="navbar-inner">
+        <div class="container text-center"
+             style="background-color: grey; ;margin-left: 0px;margin-right: 0px; width: 100%">
+            <p style="margin-top: 15px;">Copyright 2017</p>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/webapp/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/webapp/static/js/bootstrap-3.3.7.min.js"></script>
+
+</html>

@@ -1,14 +1,29 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "1.5.1.RELEASE"
+}
+
 group 'test'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile 'mysql:mysql-connector-java'
+    compile('org.thymeleaf:thymeleaf:3.0.6.RELEASE')
+    compile('org.thymeleaf:thymeleaf-spring4:3.0.6.RELEASE')
 }
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4'
+}
+

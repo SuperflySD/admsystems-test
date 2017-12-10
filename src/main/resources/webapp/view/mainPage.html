@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:background-color="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Epam Calendar sync</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/webapp/static/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/webapp/static/css/bootstrap-3.3.7.min.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/webapp/static/css/mainPage.css"/>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse" style="border-right-width: 0px;border-bottom-width: 0px;margin-bottom: 0px;">
+    <div class="container-fluid" style="padding-right: 0px;">
+        <div class="navbar-header">
+            <a class="navbar-brand">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar" style=" padding-right: 0px;">
+            <ul class="nav navbar-nav">
+                <a class="navbar-brand" th:href="@{/}" style="background-color:grey">Home</a>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style=" margin-right: 0px;">
+
+                <div class="dropdown" style="margin-top: 11px;" th:if="*{session.user!=null}">
+                    <button class="btn btn-md  dropdown-toggle" type="button" data-toggle="dropdown"
+                            style="margin-top: 10px;border-top-width: 1px; border-bottom-width: 0px;border-right-width: 0px;padding-bottom: 4px; height: 28px;"
+                            th:text="*{session.user.getMasterAccount().getEmail()}">
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/logout}" th:text="'Log out'"></a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown" style="margin-top: 11px;" th:if="*{session.user==null}">
+                    <a class="btn btn-md"
+                       style="margin-top: 10px;border-top-width: 1px; border-bottom-width: 0px;border-right-width: 0px;padding-bottom: 4px; height: 28px;"
+                       th:text="'Log in'" th:href="@{/master}">
+                    </a>
+                </div>
+            </ul>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container-fluid text-center" style="padding-right: 0px;">
+    <div class="row content">
+        <div class="col-sm-3 sidenav" style="padding-top: 0px; ">
+            <h3>Master account</h3>
+            <br>
+            <p style="padding-top: 0px;"><h4 th:text="${session.user.getMasterAccount().getEmail()}"></h4></p>
+        </div>
+        <div class="col-sm-1 sidenav" style="padding-left: 0px; text-align: left;">
+
+        </div>
+        <div class="col-sm-8 text-center">
+            <div class="row">
+                <div class="col-sm-7 text-right"><h3>Attached accounts</h3></div>
+                <div class="col-sm-1 text-center"></div>
+                <div class="col-sm-4 text-right"><a class="btn btn-info" role="button" th:href="@{/attach}"> Attach
+                    new
+                    account </a>
+                </div>
+            </div>
+
+
+            <div th:each="attachedAccount:${list}" class="us">
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <!--/*@thymesVar id="attachedAccount" type="com.epam.cln.entity.db.Account"*/-->
+                        <h4 th:text="${attachedAccount.getEmail()}"></h4></div>
+                    <div class="col-sm-3"><a class="btn btn-success btn-lg" role="button" id="compCal"
+                                             th:href="@{'/beforeSync/'+${attachedAccount.getEmail()}}">
+                        Compare Calendar </a>
+                    </div>
+                    <div class="col-sm-3"><a class="btn btn-danger btn-lg" role="button"
+                                             th:href="@{'/detachAccount/'+${attachedAccount.getEmail()}}">
+                        Detach account </a>
+                    </div>
+
+                    <div class="col-sm-3"><a class="btn btn-primary btn-lg" role="button"
+                                             th:href="@{'/filters/'+${attachedAccount.getEmail()}}">
+                        Set filter </a>
+                    </div>
+
+                </div>
+            </div>
+            <div id="resultsBlock"></div>
+        </div>
+    </div>
+</div>
+
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="navbar-inner">
+        <div class="container text-center"
+             style="background-color: grey; ;margin-left: 0px;margin-right: 0px; width: 100%">
+            <p style="margin-top: 15px;">Copyright 2017</p>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/webapp/static/js/jQueryDatePicker.js"></script>
+<script type="text/javascript" src="/webapp/static/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="/webapp/static/js/mainPage.js"></script>
+<script type="text/javascript" src="/webapp/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/webapp/static/js/bootstrap-3.3.7.min.js"></script>
+</html>
