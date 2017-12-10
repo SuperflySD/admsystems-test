@@ -1,4 +1,4 @@
-package com.amdsystems.test.data.dao;
+package com.amdsystems.data.dao;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,14 +1,13 @@
-package com.amdsystems.test.service.impl;
+package com.amdsystems.service.impl;
 
-import com.amdsystems.test.data.dao.SubscriberDAO;
-import com.amdsystems.test.data.dao.TrafficDAO;
-import com.amdsystems.test.service.SubscriberService;
+import com.amdsystems.data.dao.SubscriberDAO;
+import com.amdsystems.data.dao.TrafficDAO;
+import com.amdsystems.service.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 

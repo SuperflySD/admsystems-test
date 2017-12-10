@@ -1,4 +1,4 @@
-package com.amdsystems.test.service;
+package com.amdsystems.service;
 
 
 import java.util.List;

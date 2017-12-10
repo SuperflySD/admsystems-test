@@ -1,4 +1,4 @@
-package com.amdsystems.test;
+package com.amdsystems;
 
 
 

@@ -1,7 +1,7 @@
-package com.amdsystems.test.data.dao.impl;
+package com.amdsystems.data.dao.impl;
 
 
-import com.amdsystems.test.data.dao.DAO;
+import com.amdsystems.data.dao.DAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

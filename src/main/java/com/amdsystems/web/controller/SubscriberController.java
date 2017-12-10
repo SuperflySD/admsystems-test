@@ -1,28 +1,15 @@
-package com.amdsystems.test.web.controller;
+package com.amdsystems.web.controller;
 
-import com.amdsystems.test.service.SubscriberService;
-import com.amdsystems.test.web.model.TrafficModel;
+import com.amdsystems.service.SubscriberService;
+import com.amdsystems.web.model.TrafficModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class SubscriberController {

@@ -1,4 +1,4 @@
-package com.amdsystems.test.web.model;
+package com.amdsystems.web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
