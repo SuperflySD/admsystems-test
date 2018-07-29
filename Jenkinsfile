@@ -28,7 +28,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
     final def CONTENT = "Check console output at ${env.BUILD_URL} to view the results."
     final def JENKINS_ADMINISTRATOR = "serdor@mail.ru"
 
-    mail to: RECIPIENTS,
+    mail to: JENKINS_ADMINISTRATOR,
             replyTo: JENKINS_ADMINISTRATOR,
             subject: SUBJECT,
             body: CONTENT
