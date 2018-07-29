@@ -6,7 +6,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh "chmod +x gradlew"
-                sh "./gradlew bootRun"
+                sh "./gradlew build"
+                sh "cp build/libs/admsystems-1.0-SNAPSHOT.jar ~/Documents/1.jar"
             }
         }
     }
