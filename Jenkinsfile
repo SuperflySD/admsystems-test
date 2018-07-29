@@ -1,17 +1,27 @@
 
-pipeline {
-    agent any
+node {
+    stage("checkout") {
+        checkout scm
+    }
+    stage("Test") {
+        try {
+            sh "chmod +x gradlew"
+            sh "./gradlew build"
+            sh "cp build/libs/admsystems-1.0-SNAPSHOT.jar ~/Documents/2.jar"
+            notifyBuild("Something")
+        }
 
-    stages {
-        stage('Build') {
-            steps {
-                sh "chmod +x gradlew"
-                sh "./gradlew build"
-                sh "cp build/libs/admsystems-1.0-SNAPSHOT.jar ~/Documents/2.jar"
-                notifyBuild("Something")
-            }
+        catch (err) {
+            currentBuild.result = 'FAILURE'
+            notifyBuild(currentBuild.result)
+            throw err
+        }
+        finally {
         }
     }
+
+
+
 }
 
 def notifyBuild(String buildStatus = 'STARTED') {
@@ -28,7 +38,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
     final def CONTENT = "Check console output at ${env.BUILD_URL} to view the results."
     final def JENKINS_ADMINISTRATOR = "serdor@mail.ru"
 
-    mail to: JENKINS_ADMINISTRATOR,
+    mail to: RECIPIENTS,
             replyTo: JENKINS_ADMINISTRATOR,
             subject: SUBJECT,
             body: CONTENT
