@@ -20,6 +20,8 @@ dependencies {
     compile 'mysql:mysql-connector-java'
     compile('org.thymeleaf:thymeleaf:3.0.6.RELEASE')
     compile('org.thymeleaf:thymeleaf-spring4:3.0.6.RELEASE')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.powermock:powermock-api-mockito2:2.0.0-beta.5'
 }
 
 
